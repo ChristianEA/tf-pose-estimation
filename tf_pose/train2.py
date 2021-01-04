@@ -50,8 +50,8 @@ if __name__ == '__main__':
     batchsize = 8
     model = "mobilenet"
     
+    print(os.getcwd())    
     
-
     if args.gpus <= 0:
         raise Exception('gpus <= 0')
 
@@ -108,8 +108,10 @@ if __name__ == '__main__':
 
                 l1s, l2s = net.loss_l1_l2()
                 for idx, (l1, l2) in enumerate(zip(l1s, l2s)):
-                    loss_l1 = tf.nn.l2_loss(tf.concat(l1, axis=0) - q_vect_split[gpu_id], name='loss_l1_stage%d_tower%d' % (idx, gpu_id))
-                    loss_l2 = tf.nn.l2_loss(tf.concat(l2, axis=0) - q_heat_split[gpu_id], name='loss_l2_stage%d_tower%d' % (idx, gpu_id))
+                    #loss_l1 = tf.nn.l2_loss(tf.concat(l1, axis=0) - q_vect_split[gpu_id], name='loss_l1_stage%d_tower%d' % (idx, gpu_id))
+                    #loss_l2 = tf.nn.l2_loss(tf.concat(l2, axis=0) - q_heat_split[gpu_id], name='loss_l2_stage%d_tower%d' % (idx, gpu_id))
+                    loss_l1 = tf.nn.l2_loss(tf.concat(l1, axis=0)) 
+                    loss_l2 = tf.nn.l2_loss(tf.concat(l2, axis=0)) 
                     losses.append(tf.reduce_mean([loss_l1, loss_l2]))
 
                 last_losses_l1.append(loss_l1)
