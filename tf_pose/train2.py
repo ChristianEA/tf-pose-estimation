@@ -49,8 +49,7 @@ if __name__ == '__main__':
     imgpath = "D:/swimcamD2/SwimData/pose/train2014"
     batchsize = 8
     model = "mobilenet"
-    
-    print(os.getcwd())    
+        
     
     if args.gpus <= 0:
         raise Exception('gpus <= 0')
